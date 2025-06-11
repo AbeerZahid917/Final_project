@@ -13,6 +13,12 @@ const UserSchema = new Schema({
     password:{
         type: String,
         required: true
+    },
+    type:{
+        type: String,
+        enum: ['admin', 'viewer'],
+        default: 'viewer',
+        required: true
     }
 });
 

@@ -10,7 +10,9 @@ app.use(express.json())
 
 //Avaliable routes
 app.use('/api/authentication', require('./routes/authentication'))
+app.use('/api/watch_later_movies', require('./routes/watch_later_movies'))
+app.use('/api/movies', require('./routes/movies'));
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`netflix app listening on port ${port}`)
 })

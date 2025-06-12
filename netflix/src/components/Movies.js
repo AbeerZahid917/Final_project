@@ -27,7 +27,7 @@ const Movies = (props) => {
           setMovies(prev => prev.concat(moviesData));
       }
 
-      setTotalResults(1000); // TMDB doesn't return total count for trending; you can set a dummy value or adjust logic
+      setTotalResults(1000); 
       setLoading(false);
       props.setProgress(100);
     };

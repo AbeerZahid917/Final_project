@@ -43,7 +43,6 @@ export default function Navbar() {
                         </ul>
                     
                         <button onClick={handleLogout} className="btn btn-dark" style={{backgroundColor: '#a31212'}}>Logout</button>
-
                     </div>
                 </div>
             </nav>

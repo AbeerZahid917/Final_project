@@ -8,14 +8,17 @@ const authorized = require('../middleware/authorization');
 const JWT_SECRET = 'Abeerisanokaycoder'; 
  
 
+
+
+
 // Route 1: add movie: POST "api/favorites/addFav"
 router.post('/addFav', getuser, authorized, async (req, res)=>
 { 
-    const {movie_id, title, poster_path} = req.body;
+    const {movieId, title, poster_path} = req.body;
 
     try 
     {
-        const exists = await Favorites.findOne({ user: req.user.id, movie_id });
+        const exists = await Favorites.findOne({ user: req.user.id, movieId });
         if (exists) 
         {
         return res.status(400).json({ message: 'Already in Favorites' });
@@ -23,9 +26,9 @@ router.post('/addFav', getuser, authorized, async (req, res)=>
 
         const current_movie = new Favorites({
             user: req.user.id,
-            movie_id,
-            title,
-            poster_path,
+            movieId: movieId,
+            title: title,
+            poster_path: poster_path,
         });
 
         await current_movie.save();

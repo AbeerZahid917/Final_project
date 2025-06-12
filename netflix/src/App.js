@@ -24,6 +24,8 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
   const no_navbar = ['/', '/login', '/signup'];
   const [progress, setProgress] = useState(0);
 
+
+
   return (
     <>
       {!no_navbar.includes(location.pathname) && (
@@ -43,7 +45,6 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
           <Route path="/login" element={<Login setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
           <Route path="/signup" element={<Signup setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
 
-          {/* <Route path="/movies" element={<Movies setProgress={setProgress} />} /> */}
           <Route path="/watchLaterPage" element={localStorage.getItem("role") === "admin" ? <WatchLaterPage setProgress={setProgress}/> : null} />
           <Route path="/favorites" element={localStorage.getItem("role") === "admin" ? <Favorites setProgress={setProgress}/> : null} />
         </Routes>

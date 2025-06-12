@@ -3,7 +3,7 @@ import React from 'react';
 
 
 export default function Moviecard(props) {
-  let { title, description, imageurl } = props;
+  let { title, description, imageurl, movie, onAddToWatchLater, onAddToFavorites } = props; 
 
   return (
     <div className='my-3'>
@@ -14,8 +14,13 @@ export default function Moviecard(props) {
           <p className="card-text">{description ? description.slice(0, 100) + '...' : 'No description available.'}</p>
         </div>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">Save to Watch later</li>
-          <li className="list-group-item">Add to favorites</li>
+          <li className="list-group-item" style={{ cursor: 'pointer' }} onClick={() => onAddToWatchLater(movie)}>
+            Save to Watch later
+          </li>
+
+          <li className="list-group-item" style={{ cursor: 'pointer' }} onClick={() => onAddToFavorites(movie)}>
+            Add to favorites
+          </li>
         </ul>
         <div className="card-body">
           <a href="#" className="card-link">More Info</a>

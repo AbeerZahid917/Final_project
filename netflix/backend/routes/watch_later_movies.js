@@ -11,21 +11,21 @@ const JWT_SECRET = 'Abeerisanokaycoder';
 // Route 1: add movie: POST "api/watch_later_movies/add"
 router.post('/add', getuser, authorized, async (req, res)=>
 { 
-    const {movie_id, title, poster_path} = req.body;
+    const {movieId, title, poster_path} = req.body;
 
     try 
     {
-        const exists = await Watch_later.findOne({ user: req.user.id, movie_id });
+        const exists = await Watch_later.findOne({ user: req.user.id, movieId });
         if (exists) 
         {
-        return res.status(400).json({ message: 'Already in watch later list' });
+            return res.status(400).json({ message: 'Already in watch later list' });
         }
 
         const current_movie = new Watch_later({
-        user: req.user.id,
-        movie_id,
-        title,
-        poster_path,
+            user: req.user.id,
+            movieId: movieId,
+            title: title,
+            poster_path: poster_path,
         });
 
         await current_movie.save();

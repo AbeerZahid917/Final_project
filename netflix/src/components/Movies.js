@@ -42,6 +42,7 @@ const Movies = (props) => {
       setPage(nextPage);
       fetchMovies(nextPage);
     };
+    
 
     return (
         <div className="container my-3">
@@ -49,12 +50,6 @@ const Movies = (props) => {
                 Popular Movies
             </h1>
 
-            <InfiniteScroll
-                dataLength={movies.length}
-                next={fetchMoreData}
-                hasMore={movies.length < totalResults}
-                loader={<h4 style={{ color: 'white', textAlign: 'center', marginTop: '20px' }}>Loading...</h4>}
-            >
                 <div className="container">
                     <div className="row">
                         {movies.map((movie) => (
@@ -63,15 +58,17 @@ const Movies = (props) => {
                                     title={movie.title}
                                     description={movie.overview}
                                     imageurl={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                    movie={movie}
+                                    onAddToWatchLater={props.onAddToWatchLater}
+                                    onAddToFavorites={props.onAddToFavorites}
                                 />
                             </div>
                         ))}
                     </div>
                 </div>
-            </InfiniteScroll>
         </div>
-    );
-};
+    )
+}
 
 Movies.defaultProps = {
     country: 'us',

@@ -26,7 +26,7 @@ export default function Navbar() {
 
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname==="/"? "active": ""}`} aria-current="page" to="/">Home</Link>
+                            <Link className={`nav-link ${location.pathname==="/home"? "active": ""}`} aria-current="page" to="/home">Home</Link>
                             </li>
 
                             {isAdmin && role === 'admin' && (

@@ -51,14 +51,18 @@ router.post('/createuser', [
                 type: req.body.type || 'viewer'
             });
 
-            const data = {
+            const payload = {
                 user: {
                     id: user.id,
                     type: user.type
                 }
             }
-            const auth_token = jwt.sign(data, JWT_SECRET);
-            res.json({auth_token})
+            const token = jwt.sign(payload, JWT_SECRET);
+            res.json({
+                success: true,
+                auth_token: token,
+                type: user.type || "viewer" 
+            });
         }
         catch (error)
         {
@@ -105,8 +109,12 @@ router.post('/login', [
                     type: user.type
                 }
             }
-            const auth_token = jwt.sign(payload, JWT_SECRET);
-            res.json({auth_token});
+            const token = jwt.sign(payload, JWT_SECRET);
+            res.json({
+                success: true,
+                auth_token: token,
+                type: user.type || "viewer" 
+            });
 
         }
         catch (error)

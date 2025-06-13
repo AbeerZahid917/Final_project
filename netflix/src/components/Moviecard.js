@@ -18,28 +18,28 @@ export default function Moviecard(props) {
           <p className="card-text">{description ? description.slice(0, 100) + '...' : 'No description available.'}</p>
         </div>
 
-        <ul className="list-group list-group-flush">
+        <ul className="text-center list-group list-group-flush">
           <li className="list-group-item" 
-            style={{ cursor: 'pointer' }} 
+            style={{ backgroundColor: '#db7d7d', cursor: 'pointer' }} 
             onClick={() => isInWatchLater? 
               onRemoveFromWatchLater(movie): 
               onAddToWatchLater(movie)}>
-                {isInWatchLater? 'remove from watch later': 'add to watch later'}
+                {isInWatchLater? 'Remove From Watch Later': 'Add To Watch Later'}
           </li>
 
           <li className="list-group-item" 
-            style={{ cursor: 'pointer' }} 
+            style={{ backgroundColor: '#7ddb7d', cursor: 'pointer' }} 
             onClick={() => isInFavorites?
               onRemoveFromFavorites(movie):
               onAddToFavorites(movie)}>
-                {isInFavorites? 'remove from favorites': 'add to favorites'}
+                {isInFavorites? 'Remove From Favorites': 'Add To Favorites'}
           </li>
         </ul>
         
         <a  href={`https://www.themoviedb.org/movie/${movie.id}`} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="container card-link my-1"
+            className="container text-center card-link my-1"
         >
           View on TMDB
         </a>

@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 
 export default function Signup(props) {
-    const [creds, setCreds] = useState({name: "", email: "", password: "", cpassword: "", role: "viewer"});
+    const [creds, setCreds] = useState({name: "", email: "", password: "", cpassword: "", role: ""});
     let history = useNavigate();
     
     const handleSubmit = async (e)=>{
@@ -16,7 +16,7 @@ export default function Signup(props) {
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({name: creds.name, email: creds.email, password: creds.password, cpassword: creds.cpassword, role: creds.role})
+            body: JSON.stringify({name: creds.name, email: creds.email, password: creds.password, cpassword: creds.cpassword, type: creds.role})
         });
         const json_res = await response.json();
         console.log(json_res);
@@ -26,7 +26,7 @@ export default function Signup(props) {
             localStorage.setItem('token', json_res.auth_token);
             localStorage.setItem('role', json_res.type);
             props.setIsAdmin(true);
-            history("/login");
+            history("/home");
             props.showAlert("Successfully signed up", "success")
         }
         else
@@ -69,9 +69,14 @@ export default function Signup(props) {
                     <input style={{backgroundColor: '#636262'}} type="password" className="form-control text-light" id="cpassword" name="cpassword" onChange={handleChange}/>
                 </div>
 
+
                 <div className="mb-3">
                     <label htmlFor="role" className="form-label">Role</label>
-                    <input style={{backgroundColor: '#636262'}} type="role" className="form-control text-light" id="role" name="role" onChange={handleChange}/>
+                    <select className="form-select text-light" style={{ backgroundColor: '#636262' }} id="role" name="role" onChange={handleChange} value={creds.role}>
+                        <option value="">Select Role</option>
+                        <option value="viewer">viewer</option>
+                        <option value="admin">admin</option>
+                    </select>
                 </div>
 
                 <button type="submit" className="btn text-light mb-4" style={{backgroundColor: '#a31212'}}>Submit</button>

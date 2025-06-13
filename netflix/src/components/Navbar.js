@@ -13,6 +13,10 @@ export default function Navbar() {
         navigate('/login');
     }
 
+    const handleCreate = ()=>{
+        navigate('/signup');
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor: '#a31212'}}>
@@ -27,23 +31,23 @@ export default function Navbar() {
 
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                            <Link className={`nav-link ${location.pathname==="/home"? "active": ""}`} aria-current="page" to="/home">Home</Link>
+                                <Link className={`nav-link ${location.pathname==="/home"? "active": ""}`} aria-current="page" to="/home">Home</Link>
                             </li>
 
-                            {isAdmin && role === 'admin' && (
-                                <li className="nav-item">
-                                    <Link className={`nav-link ${location.pathname === "/watchLaterPage" ? "active" : ""}`} to="/watchLaterPage">Watch Later</Link>
-                                </li>
-                            )}
+                            <li className="nav-item">
+                                <Link className={`nav-link ${location.pathname==="/watchLaterPage"? "active": ""}`} aria-current="page" to="/watchLaterPage">Watch Later</Link>
+                            </li>
+                            
 
-                            {isAdmin && role === 'admin' && (
-                                <li className="nav-item">
-                                    <Link className={`nav-link ${location.pathname === "/favorites" ? "active" : ""}`} to="/favorites">Favorites</Link>
-                                </li>
-                            )}
+                            <li className="nav-item">
+                                <Link className={`nav-link ${location.pathname==="/favorites"? "active": ""}`} aria-current="page" to="/favorites">Favorites</Link>
+                            </li>
                         </ul>
-                    
-                        <button onClick={handleLogout} className="btn btn-dark" style={{backgroundColor: '#a31212'}}>Logout</button>
+                        
+                        {isAdmin && role === 'admin' && (
+                            <button onClick={handleCreate} className="btn btn-dark mx-2" style={{backgroundColor: '#a31212'}}>Create User</button>
+                        )}
+                        <button onClick={handleLogout} className="btn btn-dark" style={{backgroundColor: '#a31212'}}>Logout</button>                           
                     </div>
                 </div>
             </nav>

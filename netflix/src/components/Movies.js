@@ -89,9 +89,9 @@ const Movies = (props) => {
                 loader={<h4 style={{ color: 'white', textAlign: 'center', marginTop: '20px' }}>Loading...</h4>}
             >
                 <div className="container">
-                    <div className="row">
+                    <div className="d-flex flex-wrap justify-content-center">
                         {movies.map((movie) => (
-                            <div className="col-md-4" key={movie.id}>
+                            <div className="m-2" key={movie.id}>
                                 <Moviecard
                                     title={movie.title}
                                     description={movie.overview}
@@ -118,8 +118,6 @@ const Movies = (props) => {
 
                                     isInWatchLater={watchLaterIds.includes(movie.id?.toString() || movie.movieId)}
                                     isInFavorites={favoriteIds.includes(movie.id?.toString() || movie.movieId)}
-
-
                                 />
                             </div>
                         ))}

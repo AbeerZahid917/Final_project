@@ -63,13 +63,6 @@ export default function Login(props) {
             <button type="submit" className="btn text-light mb-3" style={{backgroundColor: '#a31212'}}>Submit</button>
         </form>
 
-        <p>
-            Don't have an account?{" "}
-            <Link to="/signup" style={{ color: '#d11717' }}>
-                Signup!
-            </Link>
-        </p>
-
     </div>
   )
 }

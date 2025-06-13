@@ -71,7 +71,9 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
           movieId: movie.movieId || movie.id
         })
       })
+
       const res_json = await res.json();
+
       if (!res_json)
       {
         showAlert("failed to remove from favorites", "danger");
@@ -89,8 +91,7 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
     }
   }
   
-
-
+  
   return (
     <>
       {!no_navbar.includes(location.pathname) && (
@@ -110,8 +111,8 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
           <Route path="/login" element={<Login setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
           <Route path="/signup" element={<Signup setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
 
-          <Route path="/watchLaterPage" element={localStorage.getItem("role") === "admin" ? <WatchLaterPage setProgress={setProgress} showAlert={showAlert} onRemoveFromWatchLater={handleRemoveFromWatchLater}/> : null} />
-          <Route path="/favorites" element={localStorage.getItem("role") === "admin" ? <Favorites setProgress={setProgress} showAlert={showAlert} onRemoveFromFavorites={handleRemoveFromFavorites}/> : null} />
+          <Route path="/watchLaterPage" element={<WatchLaterPage setProgress={setProgress} showAlert={showAlert} onRemoveFromWatchLater={handleRemoveFromWatchLater}/>} />
+          <Route path="/favorites" element={<Favorites setProgress={setProgress} showAlert={showAlert} onRemoveFromFavorites={handleRemoveFromFavorites}/>} />
         </Routes>
       </div>
     </>

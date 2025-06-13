@@ -12,7 +12,7 @@ const JWT_SECRET = 'Abeerisanokaycoder';
 
 
 // Route 1: add movie: POST "api/favorites/addFav"
-router.post('/addFav', getuser, authorized, async (req, res)=>
+router.post('/addFav', getuser, async (req, res)=>
 { 
     const {movieId, title, poster_path} = req.body;
 
@@ -45,7 +45,7 @@ router.post('/addFav', getuser, authorized, async (req, res)=>
 
 
 // Route 2: remove movie: DELETE "api/favorites/removeFav"
-router.delete('/removeFav', getuser, authorized, async (req, res)=>
+router.delete('/removeFav', getuser, async (req, res)=>
 {
     try
     {
@@ -66,7 +66,7 @@ router.delete('/removeFav', getuser, authorized, async (req, res)=>
 
 
 // Route 3: get all watch later movies: GET "api/favorites/getAllFavs"
-router.get('/getAllFavs', getuser, authorized, async (req, res)=>
+router.get('/getAllFavs', getuser, async (req, res)=>
 {
     try
     {

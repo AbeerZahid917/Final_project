@@ -9,7 +9,7 @@ const JWT_SECRET = 'Abeerisanokaycoder';
  
 
 // Route 1: add movie: POST "api/watch_later_movies/add"
-router.post('/add', getuser, authorized, async (req, res)=>
+router.post('/add', getuser, async (req, res)=>
 { 
     const {movieId, title, poster_path} = req.body;
 
@@ -42,7 +42,7 @@ router.post('/add', getuser, authorized, async (req, res)=>
 
 
 // Route 2: remove movie: DELETE "api/watch_later_movies/remove"
-router.delete('/remove', getuser, authorized, async (req, res)=>
+router.delete('/remove', getuser, async (req, res)=>
 {
     try
     {
@@ -63,7 +63,7 @@ router.delete('/remove', getuser, authorized, async (req, res)=>
 
 
 // Route 3: get all watch later movies: GET "api/watch_later_movies/get_all_movies"
-router.get('/get_all_movies', getuser, authorized, async (req, res)=>
+router.get('/get_all_movies', getuser, async (req, res)=>
 {
     try
     {

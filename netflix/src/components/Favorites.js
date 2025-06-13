@@ -50,10 +50,10 @@ export default function Favorites(props) {
                 (<p className='container text-center text-light my-5'>No Movies In Your Favorites Playlist</p>) :
                 (
                     <div className="container my-3">
-                        <div className="row">
+                        <div className="d-flex flex-wrap justify-content-center">
 
                             {allMovieDeets.map((movie) => (
-                            <div className="col-md-4 my-3" key={movie._id}>
+                            <div className="m-2" key={movie._id}>
                                 <div className="card" style={{ width: '18rem' }}>
                                     <img
                                         src={movie.poster_path? `https://image.tmdb.org/t/p/w500${movie.poster_path}`: 'https://cdn.mos.cms.futurecdn.net/xGFuXb9XeSQNBT7sEwehek.jpg'}
@@ -71,23 +71,23 @@ export default function Favorites(props) {
                                             </p>
                                     </div>
 
-                                    <ul className="list-group list-group-flush">
+                                    <ul className=" text-center list-group list-group-flush">
                                         <li className="list-group-item" 
-                                            style={{ cursor: 'pointer' }} 
+                                            style={{ backgroundColor: '#7ddb7d', cursor: 'pointer' }} 
                                             onClick={async () => {
                                                 const success = await props.onRemoveFromFavorites(movie);
                                                 if (success) {
                                                     setAllMovieDeets(prev => prev.filter(m => (m.movieId || m.id) !== (movie.movieId || movie.id)));
                                                 }
                                             }}>
-                                            Remove from favorites
+                                            Remove From Favorites
                                         </li>
                                     </ul>
                                     
                                     <a  href={`https://www.themoviedb.org/movie/${movie.id}`} 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
-                                        className="container card-link my-1"
+                                        className="container text-center card-link my-1"
                                     >
                                         View on TMDB
                                     </a>

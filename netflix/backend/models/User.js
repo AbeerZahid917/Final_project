@@ -17,7 +17,6 @@ const UserSchema = new Schema({
     type:{
         type: String,
         enum: ['admin', 'viewer'],
-        default: 'viewer',
         required: true
     }
 });

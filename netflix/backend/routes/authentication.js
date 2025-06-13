@@ -46,7 +46,7 @@ router.post('/createuser', [
                 name: req.body.name,
                 password: sec_pass,
                 email: req.body.email,
-                type: req.body.type || 'viewer'
+                type: req.body.type 
             });
 
             const payload = {
@@ -59,7 +59,7 @@ router.post('/createuser', [
             res.json({
                 success: true,
                 auth_token: token,
-                type: user.type || "viewer" 
+                type: user.type 
             });
         }
         catch (error)
@@ -111,7 +111,7 @@ router.post('/login', [
             res.json({
                 success: true,
                 auth_token: token,
-                type: user.type || "viewer" 
+                type: user.type 
             });
 
         }

@@ -25,7 +25,6 @@ export default function Login(props) {
 
         if (json_res.success)
         {
-            // save the auth token and redirect
             localStorage.setItem('token', json_res.auth_token);
             localStorage.setItem('role', json_res.type);
             props.setIsAdmin(true);
@@ -50,11 +49,13 @@ export default function Login(props) {
     <div className='container mt-4 text-light'>
         <h1 className='my-5' style={{color: '#d11717'}}>Netflix</h1>
         <h3 className='my-3'>Login</h3>
+
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email address</label>
                 <input style={{backgroundColor: '#636262'}} type="email" className="form-control text-light" value={creds.email} onChange={handleChange} id="email" name="email"/>
             </div>
+            
             <div className="mb-3">
                 <label htmlFor="password" className="form-label">Password</label>
                 <input style={{backgroundColor: '#636262'}} type="password" className="form-control text-light" value={creds.password} onChange={handleChange} id="password" name="password"/>

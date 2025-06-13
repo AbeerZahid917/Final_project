@@ -46,34 +46,35 @@ export default function Signup(props) {
     return (
         <div className='container mt-3 text-light'>
             <h2 className='my-2'>Signup</h2>
+
             <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input style={{backgroundColor: '#636262'}} type="name" className="form-control text-light" id="name" name="name" onChange={handleChange}/>
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Name</label>
+                    <input style={{backgroundColor: '#636262'}} type="name" className="form-control text-light" id="name" name="name" onChange={handleChange}/>
+                </div>
 
-            <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email address</label>
-                <input style={{backgroundColor: '#636262'}} type="email" className="form-control text-light" id="email" name="email" onChange={handleChange}/>
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email address</label>
+                    <input style={{backgroundColor: '#636262'}} type="email" className="form-control text-light" id="email" name="email" onChange={handleChange}/>
+                </div>
 
-            <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input style={{backgroundColor: '#636262'}} type="password" className="form-control text-light" id="password" name="password" onChange={handleChange}/>
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <input style={{backgroundColor: '#636262'}} type="password" className="form-control text-light" id="password" name="password" onChange={handleChange}/>
+                </div>
 
-            
-            <div className="mb-3">
-                <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                <input style={{backgroundColor: '#636262'}} type="password" className="form-control text-light" id="cpassword" name="cpassword" onChange={handleChange}/>
-            </div>
+                
+                <div className="mb-3">
+                    <label htmlFor="cpassword" className="form-label">Confirm Password</label>
+                    <input style={{backgroundColor: '#636262'}} type="password" className="form-control text-light" id="cpassword" name="cpassword" onChange={handleChange}/>
+                </div>
 
-            <div className="mb-3">
-                <label htmlFor="role" className="form-label">Role</label>
-                <input style={{backgroundColor: '#636262'}} type="role" className="form-control text-light" id="role" name="role" onChange={handleChange}/>
-            </div>
+                <div className="mb-3">
+                    <label htmlFor="role" className="form-label">Role</label>
+                    <input style={{backgroundColor: '#636262'}} type="role" className="form-control text-light" id="role" name="role" onChange={handleChange}/>
+                </div>
 
-            <button type="submit" className="btn text-light mb-4" style={{backgroundColor: '#a31212'}}>Submit</button>
+                <button type="submit" className="btn text-light mb-4" style={{backgroundColor: '#a31212'}}>Submit</button>
             </form>
         </div>
     )

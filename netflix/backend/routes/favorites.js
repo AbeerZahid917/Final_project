@@ -51,7 +51,7 @@ router.delete('/removeFav', getuser, authorized, async (req, res)=>
     {
         await Favorites.findOneAndDelete({
             user: req.user.id,
-            movie_id: req.body.movie_id
+            movieId: req.body.movieId
         })
         res.json({message: "removed"})
     }

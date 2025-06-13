@@ -5,13 +5,13 @@ import React, { useEffect, useState } from 'react'
 
 
 
-export default function Favorites() {
-    const [movies, setMovies] = useState([]);
+export default function Favorites(props) {
     const [allMovieDeets, setAllMovieDeets] = useState([]);
 
     useEffect (() => {
         const fetchFavs = async () =>{
-            try {
+            try 
+            {
                 const res = await fetch('http://localhost:5000/api/favorites/getAllFavs', {
                     method: 'GET',
                     headers: {
@@ -30,12 +30,14 @@ export default function Favorites() {
                 );
                 setAllMovieDeets(movie_deets)
             }
-            catch (err) {
+            catch (err) 
+            {
                 console.error("couldnt fetch favorites")
             }
         };
         fetchFavs();
     }, [])
+
      
     
     return (
@@ -68,26 +70,20 @@ export default function Favorites() {
                                                 : 'No description available.'}
                                             </p>
                                     </div>
-{/* 
+
                                     <ul className="list-group list-group-flush">
-                                        <li className="list-group-item" style={{ cursor: 'pointer' }} onClick={() => onAddToWatchLater(movie)}>
-                                        Save to Watch later
+                                        <li className="list-group-item" 
+                                            style={{ cursor: 'pointer' }} 
+                                            onClick={async () => {
+                                                const success = await props.onRemoveFromFavorites(movie);
+                                                if (success) {
+                                                    setAllMovieDeets(prev => prev.filter(m => (m.movieId || m.id) !== (movie.movieId || movie.id)));
+                                                }
+                                            }}>
+                                            Remove from favorites
                                         </li>
-
-                                        <li className="list-group-item" style={{ cursor: 'pointer' }} onClick={() => onAddToFavorites(movie)}>
-                                        Add to favorites
-                                        </li>
-                                    </ul> */}
-
-                                    <div className="card-body">
-                                            <a href="#" className="card-link">
-                                            More Info
-                                            </a>
-
-                                            <a href="#" className="card-link">
-                                            IMDb
-                                            </a>
-                                    </div>
+                                    </ul>
+                                    
                                 </div>
                             </div>
                         ))}

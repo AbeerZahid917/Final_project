@@ -5,13 +5,13 @@ import React, { useEffect, useState } from 'react'
 
 
 
-export default function WatchLaterPage() {
-    const [movies, setMovies] = useState([]);
+export default function WatchLaterPage(props) {
     const [allMovieDeets, setAllMovieDeets] = useState([]);
 
     useEffect (() => {
         const fetchWatchLaters = async () =>{
-            try {
+            try 
+            {
                 const res = await fetch('http://localhost:5000/api/watch_later_movies/get_all_movies', {
                     method: 'GET',
                     headers: {
@@ -20,7 +20,7 @@ export default function WatchLaterPage() {
                 });
 
                 const res_json = await res.json();
-                const apiKey = '0fa1a3197338d149f3204cff20154131'; // Replace with your TMDB API key
+                const apiKey = '0fa1a3197338d149f3204cff20154131'; 
                 const movie_deets = await Promise.all(
                     res_json.map(async (movie) => {
                         const tmdbRes = await fetch(`https://api.themoviedb.org/3/movie/${movie.movieId}?api_key=${apiKey}`);
@@ -30,7 +30,8 @@ export default function WatchLaterPage() {
                 );
                 setAllMovieDeets(movie_deets)
             }
-            catch (err) {
+            catch (err) 
+            {
                 console.error("couldnt fetch watch laters")
             }
         };
@@ -68,26 +69,20 @@ export default function WatchLaterPage() {
                                                 : 'No description available.'}
                                             </p>
                                     </div>
-{/* 
+
                                     <ul className="list-group list-group-flush">
-                                        <li className="list-group-item" style={{ cursor: 'pointer' }} onClick={() => onAddToWatchLater(movie)}>
-                                        Save to Watch later
+                                        <li className="list-group-item" 
+                                        style={{ cursor: 'pointer' }} 
+                                        onClick={async ()=> {
+                                            const success = await props.onRemoveFromWatchLater(movie);
+                                                if (success) {
+                                                    setAllMovieDeets(prev => prev.filter(m => (m.movieId || m.id) !== (movie.movieId || movie.id)));
+                                                }
+                                        }}>
+                                        Remove from watch later playlist
                                         </li>
-
-                                        <li className="list-group-item" style={{ cursor: 'pointer' }} onClick={() => onAddToFavorites(movie)}>
-                                        Add to favorites
-                                        </li>
-                                    </ul> */}
-
-                                    <div className="card-body">
-                                            <a href="#" className="card-link">
-                                            More Info
-                                            </a>
-
-                                            <a href="#" className="card-link">
-                                            IMDb
-                                            </a>
-                                    </div>
+                                    </ul>
+                                    
                                 </div>
                             </div>
                         ))}

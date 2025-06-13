@@ -11,30 +11,53 @@ const Movies = (props) => {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
+    const [watchLaterIds, setWatchLaterIds] = useState([]);
+    const [favoriteIds, setFavoriteIds] = useState([]);
+
 
 
     const fetchMovies = async (pageNumber = 1) => {
-      setLoading(true);
-      props.setProgress(10);
+        setLoading(true);
+        props.setProgress(10);
 
-      const url = `http://localhost:5000/api/movies/trending?page=${pageNumber}`;
-      const response = await fetch(url);
-      const moviesData = await response.json();
+        const url = `http://localhost:5000/api/movies/trending?page=${pageNumber}`;
+        const response = await fetch(url);
+        const moviesData = await response.json();
 
-      if (pageNumber === 1) {
-          setMovies(moviesData);
-      } else {
-          setMovies(prev => prev.concat(moviesData));
-      }
+        if (pageNumber === 1) 
+        {
+            setMovies(moviesData);
+        } 
+        else 
+        {
+            setMovies(prev => prev.concat(moviesData));
+        }
 
-      setTotalResults(1000); 
-      setLoading(false);
-      props.setProgress(100);
+        setTotalResults(1000); 
+        setLoading(false);
+        props.setProgress(100);
     };
 
+    const fetchWatchLater = async () => {
+        const res = await fetch('http://localhost:5000/api/watch_later_movies/get_all_movies', {
+            headers: { 'auth-token': localStorage.getItem('token') }
+        });
+        const data = await res.json();
+        setWatchLaterIds(data.map(movie => movie.movieId));
+    };
+
+    const fetchFavorites = async () => {
+        const res = await fetch('http://localhost:5000/api/favorites/getAllFavs', {
+            headers: { 'auth-token': localStorage.getItem('token') }
+        });
+        const data = await res.json();
+        setFavoriteIds(data.map(movie => movie.movieId));
+    };
 
     useEffect(() => {
-      fetchMovies(1);
+        fetchMovies(1);
+        fetchWatchLater();
+        fetchFavorites();
     }, []);
 
     const fetchMoreData = () => {
@@ -42,6 +65,15 @@ const Movies = (props) => {
       setPage(nextPage);
       fetchMovies(nextPage);
     };
+
+    const handleFavoriteChange = async () => {
+        await fetchFavorites();
+    };
+
+    const handleWatchLaterChange = async () => {
+        await fetchWatchLater();
+    };
+
     
 
     return (
@@ -50,6 +82,12 @@ const Movies = (props) => {
                 Popular Movies
             </h1>
 
+            <InfiniteScroll
+                dataLength={movies.length}
+                next={fetchMoreData}
+                hasMore={movies.length < totalResults}
+                loader={<h4 style={{ color: 'white', textAlign: 'center', marginTop: '20px' }}>Loading...</h4>}
+            >
                 <div className="container">
                     <div className="row">
                         {movies.map((movie) => (
@@ -59,13 +97,33 @@ const Movies = (props) => {
                                     description={movie.overview}
                                     imageurl={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                     movie={movie}
-                                    onAddToWatchLater={props.onAddToWatchLater}
-                                    onAddToFavorites={props.onAddToFavorites}
+
+                                    onAddToWatchLater={async (movie) => {
+                                        await props.onAddToWatchLater(movie);
+                                        handleWatchLaterChange(); 
+                                    }}
+                                    onRemoveFromWatchLater={async (movie) => {
+                                        await props.onRemoveFromWatchLater(movie);
+                                        handleWatchLaterChange(); 
+                                    }}
+
+                                    onAddToFavorites={async (movie) => {
+                                        await props.onAddToFavorites(movie);
+                                        handleFavoriteChange(); 
+                                    }}
+                                    onRemoveFromFavorites={async (movie) => {
+                                        await props.onRemoveFromFavorites(movie);
+                                        handleFavoriteChange(); 
+                                    }}
+
+                                    isInWatchLater={watchLaterIds.includes(movie.id?.toString() || movie.movieId)}
+                                    isInFavorites={favoriteIds.includes(movie.id?.toString() || movie.movieId)}
                                 />
                             </div>
                         ))}
                     </div>
                 </div>
+            </InfiniteScroll>
         </div>
     )
 }

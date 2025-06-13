@@ -25,6 +25,71 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
   const [progress, setProgress] = useState(0);
 
 
+  const handleRemoveFromWatchLater = async (movie) =>{
+    try
+    {
+      const res = await fetch("http://localhost:5000/api/watch_later_movies/remove", {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': localStorage.getItem('token')
+        }, 
+        body: JSON.stringify ({
+          movieId: movie.movieId || movie.id
+        })
+      })
+
+      const res_json = await res.json()
+      if (!res_json)
+      {
+        showAlert("failed to remove from watch later", "danger");
+        return { success: false };
+      }
+      else
+      {
+        showAlert("Removed from watch later playlist successfully", "success");
+        return { success: true, movieId: movie.movieId || movie.id };
+      }
+    }
+    catch (err)
+    {
+      showAlert("error", "danger")
+    }
+  }
+
+
+  const handleRemoveFromFavorites = async (movie) =>{
+    try
+    {
+      const res = await fetch("http://localhost:5000/api/favorites/removeFav", {
+        method: "DELETE",
+        headers: {
+          'Content-Type': 'application/json',
+          'auth-token': localStorage.getItem('token')
+        },
+        body: JSON.stringify ({
+          movieId: movie.movieId || movie.id
+        })
+      })
+      const res_json = await res.json();
+      if (!res_json)
+      {
+        showAlert("failed to remove from favorites", "danger");
+        return { success: false };
+      }
+      else
+      {
+        showAlert("removed from favorites successfully", "success")
+        return { success: true, movieId: movie.movieId || movie.id };
+      }
+    }
+    catch (err)
+    {
+      showAlert("error", "danger")
+    }
+  }
+  
+
 
   return (
     <>
@@ -41,12 +106,12 @@ function AppContent({ alert, showAlert, isAdmin, setIsAdmin }) {
       <div className="container">
         <Routes>
           <Route path="/" element={<Login setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
-          <Route path="/home" element={<Home setProgress={setProgress} setIsAdmin={setIsAdmin} />} />
+          <Route path="/home" element={<Home setProgress={setProgress} setIsAdmin={setIsAdmin} showAlert={showAlert}/>} />
           <Route path="/login" element={<Login setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
           <Route path="/signup" element={<Signup setProgress={setProgress} showAlert={showAlert} setIsAdmin={setIsAdmin} />} />
 
-          <Route path="/watchLaterPage" element={localStorage.getItem("role") === "admin" ? <WatchLaterPage setProgress={setProgress}/> : null} />
-          <Route path="/favorites" element={localStorage.getItem("role") === "admin" ? <Favorites setProgress={setProgress}/> : null} />
+          <Route path="/watchLaterPage" element={localStorage.getItem("role") === "admin" ? <WatchLaterPage setProgress={setProgress} showAlert={showAlert} onRemoveFromWatchLater={handleRemoveFromWatchLater}/> : null} />
+          <Route path="/favorites" element={localStorage.getItem("role") === "admin" ? <Favorites setProgress={setProgress} showAlert={showAlert} onRemoveFromFavorites={handleRemoveFromFavorites}/> : null} />
         </Routes>
       </div>
     </>
@@ -73,8 +138,6 @@ function App() {
     const role = localStorage.getItem('role');
     setIsAdmin(token && role === 'admin');
   }, []);
-
-
 
 
   return (

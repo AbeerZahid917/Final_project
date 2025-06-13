@@ -21,7 +21,7 @@ router.post('/addFav', getuser, authorized, async (req, res)=>
         const exists = await Favorites.findOne({ user: req.user.id, movieId });
         if (exists) 
         {
-        return res.status(400).json({ message: 'Already in Favorites' });
+            return res.status(400).json({ message: 'Already in Favorites' });
         }
 
         const current_movie = new Favorites({

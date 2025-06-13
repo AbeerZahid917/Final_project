@@ -118,6 +118,8 @@ const Movies = (props) => {
 
                                     isInWatchLater={watchLaterIds.includes(movie.id?.toString() || movie.movieId)}
                                     isInFavorites={favoriteIds.includes(movie.id?.toString() || movie.movieId)}
+
+
                                 />
                             </div>
                         ))}

@@ -17,6 +17,7 @@ app.use('/api/watch_later_movies', require('./routes/watch_later_movies'))
 app.use('/api/movies', require('./routes/movies'));
 app.use('/api/favorites', require('./routes/favorites'));
 
-app.listen(5000, () => {
+app.listen(5000, () => 
+{
   console.log(`netflix app listening on port ${port}`)
 })

@@ -46,7 +46,7 @@ export default function WatchLaterPage(props) {
             </h1>
 
             {allMovieDeets.length === 0? 
-                (<p>No Movies In Your Watch Later Playlist</p>) :
+                (<p className='container text-center text-light my-5'>No Movies In Your Watch Later Playlist</p>) :
                 (
                     <div className="container my-3">
                         <div className="row">
@@ -83,6 +83,14 @@ export default function WatchLaterPage(props) {
                                         </li>
                                     </ul>
                                     
+                                    <a  href={`https://www.themoviedb.org/movie/${movie.id}`} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className="container card-link my-1"
+                                    >
+                                        View on TMDB
+                                    </a>
+
                                 </div>
                             </div>
                         ))}

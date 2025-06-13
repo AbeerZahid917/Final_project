@@ -33,7 +33,6 @@ router.post('/createuser', [
 
         try
         {
-            // check whether the email exists already
             let user = await User.findOne({email: req.body.email});
             if (user)
             {
@@ -43,7 +42,6 @@ router.post('/createuser', [
             const salt = await bcrypt.genSalt(10);
             const sec_pass = await bcrypt.hash(req.body.password, salt);
 
-            // creates a new user
             user = await User.create ({
                 name: req.body.name,
                 password: sec_pass,
@@ -136,7 +134,7 @@ router.post('/getuser', getuser, async (req, res) => {
     try
     {
         const userId = req.user.id;
-        const user = await User.findById(userId).select("-password"); // selects everything except the password
+        const user = await User.findById(userId).select("-password"); 
         res.send({user})
     }
     catch (error)

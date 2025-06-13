@@ -15,7 +15,9 @@ router.get('/trending', async (req, res) => {
       `https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_API_KEY}&page=${page}`
     );
     res.json(response.data.results);
-  } catch (error) {
+  } 
+  catch (error) 
+  {
     console.error(error);
     res.status(500).json({ error: 'Failed to fetch movies' });
   }

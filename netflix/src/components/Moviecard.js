@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 
 export default function Moviecard(props) {
   const {
@@ -38,6 +35,15 @@ export default function Moviecard(props) {
                 {isInFavorites? 'remove from favorites': 'add to favorites'}
           </li>
         </ul>
+        
+        <a  href={`https://www.themoviedb.org/movie/${movie.id}`} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="container card-link my-1"
+        >
+          View on TMDB
+        </a>
+
 
       </div>
     </div>
